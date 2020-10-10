@@ -3,7 +3,7 @@ defmodule AppUnite.Pharmacy.PharmacyModel do
 
   alias AppUnite.Pharmacy.Pharmacy
 
-  @initial_budget 25000
+  @initial_budget 75000
 
   def create(name) do
     params = %{
@@ -13,6 +13,6 @@ defmodule AppUnite.Pharmacy.PharmacyModel do
 
     %Pharmacy{}
     |> Pharmacy.changeset(params)
-    |> Repo.create()
+    |> Repo.insert()
   end
 end

@@ -6,7 +6,7 @@ defmodule AppUnite.Pharmacy.Pharmacy do
     field :budget, :decimal
   end
 
-  @schema_fields ["name", "budget"]
+  @schema_fields [:name, :budget]
 
   def changeset(schema, params) do
     schema

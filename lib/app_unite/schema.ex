@@ -1,5 +1,5 @@
 defmodule AppUnite.Schema do
-  defmacro __using()__ do
+  defmacro __using__(_) do
     quote do
       use Ecto.Schema
       import Ecto.Changeset
