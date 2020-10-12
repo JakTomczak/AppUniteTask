@@ -14,7 +14,8 @@ defmodule AppUnite.Pharmacy.BudgetHistoryModelTest do
     end
 
     test "with valid data", %{pharmacy: pharmacy} do
-      assert {:ok, %BudgetHistory{reason: @reason} = history} = BudgetHistoryModel.create(pharmacy, 25000, @reason)
+      assert {:ok, %BudgetHistory{reason: @reason} = history} =
+               BudgetHistoryModel.create(pharmacy, 25000, @reason)
 
       assert Decimal.eq?(history.beforehand, 12000)
       assert Decimal.eq?(history.afterwards, 25000)

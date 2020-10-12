@@ -6,7 +6,7 @@ defmodule AppUnite.Repo.Migrations.CreatePrescription do
       add :id, :binary_id, primary_key: true
 
       add :name, :string, null: false
-      add :budget, :decimal,  null: false, default: 0
+      add :budget, :decimal, null: false, default: 0
 
       timestamps()
     end

@@ -10,7 +10,7 @@ defmodule AppUnite.Pharmacy.PharmacyModelTest do
     test "with valid data" do
       assert {:ok, %Pharmacy{name: @name, budget: budget}} = PharmacyModel.create(@name)
 
-      assert Decimal.eq?(budget, 100000)
+      assert Decimal.eq?(budget, 100_000)
     end
 
     test "without required data" do
@@ -19,7 +19,7 @@ defmodule AppUnite.Pharmacy.PharmacyModelTest do
 
     test "with unique constraint violation" do
       PharmacyModel.create(@name)
-      
+
       assert {:error, _changeset} = PharmacyModel.create(@name)
     end
   end

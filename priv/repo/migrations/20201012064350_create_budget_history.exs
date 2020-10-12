@@ -8,8 +8,8 @@ defmodule AppUnite.Repo.Migrations.CreateBudgetHistory do
       add :pharmacy_id, references(:pharmacy, type: :binary_id), null: false
 
       add :reason, :string, null: false
-      add :beforehand, :decimal,  null: false
-      add :afterwards, :decimal,  null: false
+      add :beforehand, :decimal, null: false
+      add :afterwards, :decimal, null: false
 
       timestamps()
     end
