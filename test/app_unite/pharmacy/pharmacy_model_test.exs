@@ -38,11 +38,11 @@ defmodule AppUnite.Pharmacy.PharmacyModelTest do
       insert(:pharmacy, name: "B")
 
       assert [
-        %Pharmacy{name: "A"},
-        %Pharmacy{name: "B"},
-        %Pharmacy{name: "C"},
-        %Pharmacy{name: "D"}
-      ] = PharmacyModel.list()
+               %Pharmacy{name: "A"},
+               %Pharmacy{name: "B"},
+               %Pharmacy{name: "C"},
+               %Pharmacy{name: "D"}
+             ] = PharmacyModel.list()
     end
 
     test "when empty results" do

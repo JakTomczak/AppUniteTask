@@ -7,4 +7,13 @@ defmodule AppUnite.Factory do
       budget: 10000
     }
   end
+
+  def pharmacy_budget_history_factory do
+    %AppUnite.Pharmacy.BudgetHistory{
+      pharmacy_id: Ecto.UUID.generate(),
+      reason: "purchase",
+      beforehand: 10000,
+      afterwards: 9500
+    }
+  end
 end
