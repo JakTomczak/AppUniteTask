@@ -5,6 +5,8 @@ defmodule AppUnite.Pharmacy.Pharmacy do
     field :name, :string
     field :budget, :decimal
 
+    has_many :budget_histories, AppUnite.Pharmacy.BudgetHistory
+
     timestamps()
   end
 
