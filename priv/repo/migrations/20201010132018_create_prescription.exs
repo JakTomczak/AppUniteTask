@@ -7,6 +7,8 @@ defmodule AppUnite.Repo.Migrations.CreatePrescription do
 
       add :name, :string, null: false
       add :budget, :decimal,  null: false, default: 0
+
+      timestamps()
     end
 
     create unique_index(:pharmacy, [:name], name: :name_of_the_pharmacy)

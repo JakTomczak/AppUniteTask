@@ -3,7 +3,7 @@ defmodule AppUnite.Pharmacy.PharmacyModel do
 
   alias AppUnite.Pharmacy.Pharmacy
 
-  @initial_budget 75000
+  @initial_budget 100000
 
   def create(name) do
     params = %{

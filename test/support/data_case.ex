@@ -9,6 +9,8 @@ defmodule AppUnite.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import AppUnite.DataCase
+
+      import AppUnite.Factory
     end
   end
 

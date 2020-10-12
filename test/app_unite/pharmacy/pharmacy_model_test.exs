@@ -10,7 +10,7 @@ defmodule AppUnite.Pharmacy.PharmacyModelTest do
     test "with valid data" do
       assert {:ok, %Pharmacy{name: @name, budget: budget}} = PharmacyModel.create(@name)
 
-      assert Decimal.eq?(budget, 75000)
+      assert Decimal.eq?(budget, 100000)
     end
 
     test "without required data" do

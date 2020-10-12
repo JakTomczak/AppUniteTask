@@ -4,6 +4,8 @@ defmodule AppUnite.Pharmacy.Pharmacy do
   schema "pharmacy" do
     field :name, :string
     field :budget, :decimal
+
+    timestamps()
   end
 
   @schema_fields [:name, :budget]
