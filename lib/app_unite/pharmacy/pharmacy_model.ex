@@ -1,12 +1,13 @@
 defmodule AppUnite.Pharmacy.PharmacyModel do
   alias AppUnite.Repo
-  import Ecto.Query
+  require Ecto.Query
+  alias Ecto.Query
 
   alias AppUnite.Pharmacy.Pharmacy
 
   @initial_budget 100_000
 
-  def preloads, do: [:budget_histories]
+  @preloads [:budget_histories]
 
   def create(name) do
     params = %{
@@ -21,8 +22,25 @@ defmodule AppUnite.Pharmacy.PharmacyModel do
 
   def list() do
     Pharmacy
-    |> preload(^preloads())
-    |> order_by(asc: :name)
+    |> Query.preload(^@preloads)
+    |> Query.order_by(asc: :name)
     |> Repo.all()
+  end
+
+  def preload(%Pharmacy{} = pharmacy) do
+    pharmacy
+    |> Repo.preload(@preloads)
+  end
+
+  def get(nil), do: {:error, :get_nil, "Pharmacy"}
+
+  def get(id) do
+    Pharmacy
+    |> Repo.get(id)
+    |> case do
+      nil -> {:error, :not_found, "Pharmacy"}
+
+      pharmacy -> {:ok, pharmacy}
+    end
   end
 end

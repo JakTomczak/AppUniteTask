@@ -8,7 +8,6 @@ defmodule AppUniteWeb.Router do
   scope "/api", AppUniteWeb do
     pipe_through :api
 
-    # resources "/pharmacies", Pharmacy.PharmacyController, only: [:index, :update]
     resources "/pharmacies", Pharmacy.PharmacyController, only: [:index, :update]
   end
 end

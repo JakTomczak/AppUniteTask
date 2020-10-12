@@ -49,4 +49,35 @@ defmodule AppUnite.Pharmacy.PharmacyModelTest do
       assert [] = PharmacyModel.list()
     end
   end
+
+  describe "Pharmacy Model preload/1" do
+    test "preloads associations" do
+      pharmacy = insert(:pharmacy)
+      insert(:pharmacy_budget_history, pharmacy_id: pharmacy.id)
+
+      pharmacy = PharmacyModel.preload(pharmacy)
+
+      assert [_history] = pharmacy.budget_histories
+    end
+
+    test "when argument isn't Pharmacy" do
+      assert_raise FunctionClauseError, fn -> PharmacyModel.preload(nil) end
+    end
+  end
+
+  describe "Pharmacy Model get/1" do
+    test "when record exists" do
+      %{id: id} = insert(:pharmacy)
+
+      assert {:ok, %Pharmacy{id: ^id}} = PharmacyModel.get(id)
+    end
+
+    test "when record doesn't exist" do
+      assert {:error, :not_found, "Pharmacy"} = PharmacyModel.get(Ecto.UUID.generate())
+    end
+
+    test "when nil given" do
+      assert {:error, :get_nil, "Pharmacy"} = PharmacyModel.get(nil)
+    end
+  end
 end

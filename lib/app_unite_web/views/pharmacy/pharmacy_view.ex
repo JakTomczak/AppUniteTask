@@ -1,11 +1,20 @@
 defmodule AppUniteWeb.Pharmacy.PharmacyView do
   use AppUniteWeb, :view
 
+  alias AppUnite.Pharmacy.PharmacyModel
   alias AppUniteWeb.Pharmacy.BudgetHistoryView
 
   def render("index.json", %{pharmacies: pharmacies}) do
     %{
       data: render_many(pharmacies, __MODULE__, "pharmacy.json", as: :pharmacy)
+    }
+  end
+
+  def render("show.json", %{pharmacy: pharmacy}) do
+    pharmacy = PharmacyModel.preload(pharmacy)
+
+    %{
+      data: render_one(pharmacy, __MODULE__, "pharmacy.json", as: :pharmacy)
     }
   end
 

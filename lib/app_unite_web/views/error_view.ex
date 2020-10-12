@@ -1,16 +1,25 @@
 defmodule AppUniteWeb.ErrorView do
   use AppUniteWeb, :view
 
-  # If you want to customize a particular status code
-  # for a certain format, you may uncomment below.
-  # def render("500.json", _assigns) do
-  #   %{errors: %{detail: "Internal Server Error"}}
-  # end
+  alias Ecto.Changeset
 
-  # By default, Phoenix returns the status message from
-  # the template name. For example, "404.json" becomes
-  # "Not Found".
-  def template_not_found(template, _assigns) do
-    %{errors: %{detail: Phoenix.Controller.status_message_from_template(template)}}
+  def render("error.json", %{changeset: changeset, type: type}) do
+    %{
+      message: "Error during operating on #{type}.",
+      errors: translate_errors(changeset)
+    }
+  end
+
+  defp translate_errors(changeset) do
+    changeset
+    |> Changeset.traverse_errors(fn {msg, opts} ->
+      opts
+      |> Enum.reduce(msg, fn {key, value}, acc_msg ->
+        String.replace(acc_msg, "%{#{key}}", to_string(value))
+      end)
+    end)
+    |> Enum.map(fn {field, [first_message | _others]} -> 
+      %{field: field, message: first_message}
+    end)
   end
 end

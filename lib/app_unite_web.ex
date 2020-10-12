@@ -23,6 +23,8 @@ defmodule AppUniteWeb do
 
       import Plug.Conn
       alias AppUniteWeb.Router.Helpers, as: Routes
+
+      action_fallback(AppUniteWeb.FallbackController)
     end
   end
 
