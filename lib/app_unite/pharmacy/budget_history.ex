@@ -1,4 +1,9 @@
 defmodule AppUnite.Pharmacy.BudgetHistory do
+  @moduledoc """
+  Budget History represents an adjustment of Pharmacy's :budget.
+  It can be either increase or decrease of the budget.
+  """
+
   use AppUnite.Schema
 
   schema "pharmacy_budget_history" do

@@ -4,6 +4,9 @@ defmodule AppUniteWeb.Pharmacy.PharmacyController do
   alias AppUnite.Pharmacy.PharmacyModel
   alias AppUnite.Pharmacy.PharmacyService
 
+  @doc """
+  Returns all Pharmacies, sorted by name ascending.
+  """
   def index(conn, _params) do
     pharmacies = PharmacyModel.list()
 
@@ -12,6 +15,9 @@ defmodule AppUniteWeb.Pharmacy.PharmacyController do
     |> render("index.json", pharmacies: pharmacies)
   end
 
+  @doc """
+  Returns Pharmacy with new budget.
+  """
   def update(conn, %{"id" => pharmacy_id, "data" => params}) do
     with {:ok, pharmacy} <- PharmacyModel.get(pharmacy_id),
          {:ok, pharmacy} <- PharmacyService.update_budget(pharmacy, params) do

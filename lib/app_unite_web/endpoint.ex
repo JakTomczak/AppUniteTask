@@ -1,20 +1,9 @@
 defmodule AppUniteWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :app_unite
 
-  # The session will be stored in the cookie and signed,
-  # this means its contents can be read but not tampered with.
-  # Set :encryption_salt if you would also like to encrypt it.
-  @session_options [
-    store: :cookie,
-    key: "_app_unite_key",
-    signing_salt: "5+e/IkSB"
-  ]
-
   socket "/socket", AppUniteWeb.UserSocket,
     websocket: true,
     longpoll: false
-
-  socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -33,10 +22,6 @@ defmodule AppUniteWeb.Endpoint do
     plug Phoenix.Ecto.CheckRepoStatus, otp_app: :app_unite
   end
 
-  plug Phoenix.LiveDashboard.RequestLogger,
-    param_key: "request_logger",
-    cookie_key: "request_logger"
-
   plug Plug.RequestId
 
   plug Plug.Parsers,
@@ -46,6 +31,5 @@ defmodule AppUniteWeb.Endpoint do
 
   plug Plug.MethodOverride
   plug Plug.Head
-  plug Plug.Session, @session_options
   plug AppUniteWeb.Router
 end

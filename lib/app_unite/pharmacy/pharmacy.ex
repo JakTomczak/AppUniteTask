@@ -1,4 +1,10 @@
 defmodule AppUnite.Pharmacy.Pharmacy do
+  @moduledoc """
+  Pharmacy is an instance buying drugs from vendors and disbursing them to doctors.
+  Pharmacy has a limited daily budget it must strive to uphold.
+  No feature should be blocked when budget is negative, it's just an info for admins.
+  """
+
   use AppUnite.Schema
 
   schema "pharmacy" do

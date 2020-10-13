@@ -1,10 +1,15 @@
 defmodule AppUnite.Pharmacy.PharmacyService do
+  @moduledoc """
+  Module for functions oparating on many related-to-pharmacy schemas.
+  """
+
   alias AppUnite.Repo
   alias Ecto.Multi
 
   alias AppUnite.Pharmacy.PharmacyModel
   alias AppUnite.Pharmacy.BudgetHistoryModel
 
+  @spec update_budget(PharmacyModel.t(), map()) :: {:ok, PharmacyModel.t()} | {:error, String.t(), Ecto.Changeset.t()}
   def update_budget(pharmacy, params) do
     Multi.new()
     |> Multi.run(:history, fn _repo, _changes ->

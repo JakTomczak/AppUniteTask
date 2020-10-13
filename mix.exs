@@ -10,7 +10,19 @@ defmodule AppUnite.MixProject do
       compilers: [:phoenix] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      dialyzer: [
+        plt_add_apps: [
+          :phoenix,
+          :phoenix_ecto,
+          :phoenix_pubsub,
+          :ecto_sql,
+          :postgrex,
+          :jason,
+          :plug_cowboy
+        ],
+        flags: ["-Wunmatched_returns", :error_handling, :race_conditions, :underspecs]
+      ]
     ]
   end
 
@@ -37,11 +49,11 @@ defmodule AppUnite.MixProject do
       {:phoenix_ecto, "~> 4.1"},
       {:ecto_sql, "~> 3.4"},
       {:postgrex, ">= 0.0.0"},
-      {:phoenix_live_dashboard, "~> 0.2"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:decimal, "~> 2.0"},
-      {:ex_machina, "~> 2.4", only: :test}
+      {:ex_machina, "~> 2.4", only: :test},
+      {:dialyzex, "~> 1.2.0", only: :dev, runtime: false}
     ]
   end
 
