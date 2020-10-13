@@ -18,7 +18,7 @@ defmodule AppUniteWeb.ErrorView do
         String.replace(acc_msg, "%{#{key}}", to_string(value))
       end)
     end)
-    |> Enum.map(fn {field, [first_message | _others]} -> 
+    |> Enum.map(fn {field, [first_message | _others]} ->
       %{field: field, message: first_message}
     end)
   end

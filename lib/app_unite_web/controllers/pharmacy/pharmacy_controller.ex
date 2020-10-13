@@ -14,10 +14,15 @@ defmodule AppUniteWeb.Pharmacy.PharmacyController do
 
   def update(conn, %{"id" => pharmacy_id, "data" => params}) do
     with {:ok, pharmacy} <- PharmacyModel.get(pharmacy_id),
-    {:ok, pharmacy} <- PharmacyService.update_budget(params) do
+         {:ok, pharmacy} <- PharmacyService.update_budget(pharmacy, params) do
       conn
       |> put_status(:accepted)
       |> render("show.json", pharmacy: pharmacy)
     end
+  end
+
+  def update(conn, %{"id" => _pharmacy_id}) do
+    conn
+    |> send_resp(:bad_request, "Field 'data' of type JSON is required.")
   end
 end

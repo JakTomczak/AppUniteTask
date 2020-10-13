@@ -18,4 +18,10 @@ defmodule AppUnite.Pharmacy.Pharmacy do
     |> validate_required(@schema_fields)
     |> unique_constraint(:name, name: :name_of_the_pharmacy)
   end
+
+  def update_budget_changeset(schema, params) do
+    schema
+    |> cast(params, [:budget])
+    |> validate_required([:budget])
+  end
 end

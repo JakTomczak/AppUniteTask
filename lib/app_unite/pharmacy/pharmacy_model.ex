@@ -20,6 +20,16 @@ defmodule AppUnite.Pharmacy.PharmacyModel do
     |> Repo.insert()
   end
 
+  def update_budget(%Pharmacy{} = pharmacy, new_budget) do
+    params = %{
+      budget: new_budget
+    }
+
+    pharmacy
+    |> Pharmacy.update_budget_changeset(params)
+    |> Repo.update()
+  end
+
   def list() do
     Pharmacy
     |> Query.preload(^@preloads)
@@ -39,7 +49,6 @@ defmodule AppUnite.Pharmacy.PharmacyModel do
     |> Repo.get(id)
     |> case do
       nil -> {:error, :not_found, "Pharmacy"}
-
       pharmacy -> {:ok, pharmacy}
     end
   end

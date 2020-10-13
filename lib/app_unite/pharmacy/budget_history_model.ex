@@ -15,4 +15,9 @@ defmodule AppUnite.Pharmacy.BudgetHistoryModel do
     |> BudgetHistory.changeset(pharmacy, params)
     |> Repo.insert()
   end
+
+  def list() do
+    BudgetHistory
+    |> Repo.all()
+  end
 end

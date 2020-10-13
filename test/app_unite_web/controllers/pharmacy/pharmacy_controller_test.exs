@@ -54,4 +54,72 @@ defmodule AppUniteWeb.Pharmacy.PharmacyControllerTest do
              } = json_response(conn, 200)
     end
   end
+
+  describe "Pharmacy Controller PUT update/2" do
+    setup do
+      %{id: id} = insert(:pharmacy)
+
+      [
+        url: "/api/pharmacies/#{id}",
+        params: %{
+          "new_budget" => -1000,
+          "reason" => "purchase"
+        }
+      ]
+    end
+
+    test "updates budget and stores history", context do
+      params = %{"data" => context.params}
+
+      conn = put(context.conn, context.url, params)
+
+      assert %{
+               "data" => %{
+                 "budget" => "-1000",
+                 "budget_histories" => [
+                   %{
+                     "reason" => "purchase",
+                     "afterwards" => "-1000"
+                   }
+                 ]
+               }
+             } = json_response(conn, 202)
+    end
+
+    test "when wrong pharmacy_id given", context do
+      url = "/api/pharmacies/#{Ecto.UUID.generate()}"
+
+      params = %{"data" => context.params}
+
+      conn = put(context.conn, url, params)
+
+      assert response(conn, 404) =~ "Pharmacy"
+    end
+
+    test "when no data given", context do
+      params = %{}
+
+      conn = put(context.conn, context.url, params)
+
+      assert response(conn, 400) =~ "required"
+    end
+
+    test "when required field is missing", context do
+      params = %{
+        "data" => Map.delete(context.params, "new_budget")
+      }
+
+      conn = put(context.conn, context.url, params)
+
+      assert %{
+               "message" => "Error during operating on Pharmacy Budget History.",
+               "errors" => [
+                 %{
+                   "field" => "afterwards",
+                   "message" => "can't be blank"
+                 }
+               ]
+             } = json_response(conn, 422)
+    end
+  end
 end

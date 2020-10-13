@@ -24,6 +24,26 @@ defmodule AppUnite.Pharmacy.PharmacyModelTest do
     end
   end
 
+  describe "Pharmacy Model update_budget/2" do
+    test "with valid data" do
+      pharmacy = insert(:pharmacy)
+
+      assert {:ok, %Pharmacy{budget: budget}} = PharmacyModel.update_budget(pharmacy, 777)
+
+      assert Decimal.eq?(budget, 777)
+    end
+
+    test "without required data" do
+      pharmacy = insert(:pharmacy)
+
+      assert {:error, _changeset} = PharmacyModel.update_budget(pharmacy, nil)
+    end
+
+    test "when argument isn't Pharmacy" do
+      assert_raise FunctionClauseError, fn -> PharmacyModel.update_budget(nil, 777) end
+    end
+  end
+
   describe "Pharmacy Model list/0" do
     test "preloads children" do
       insert(:pharmacy)

@@ -34,4 +34,17 @@ defmodule AppUnite.Pharmacy.BudgetHistoryModelTest do
       assert_raise FunctionClauseError, fn -> BudgetHistoryModel.create(nil, 25000, @reason) end
     end
   end
+
+  describe "Budget History Model list/0" do
+    test "when records exist" do
+      %{id: pharmacy_id} = insert(:pharmacy)
+      insert_list(3, :pharmacy_budget_history, pharmacy_id: pharmacy_id)
+
+      assert 3 == length(BudgetHistoryModel.list())
+    end
+
+    test "when empty results" do
+      assert [] = BudgetHistoryModel.list()
+    end
+  end
 end
