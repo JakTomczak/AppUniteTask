@@ -17,7 +17,7 @@ defmodule AppUnite.Pharmacy.BudgetHistoryModel do
   }
 
   @doc """
-  Creates Budget History as a child of Pharmacy and with given arguments.
+  Creates Bduget History as a child of Pharmacy and with given arguments.
   """
   @spec create(PharmacyModel.t(), Decimal.t(), String.t()) :: {:ok, t()} | {:error, Ecto.Changeset.t()}
   def create(%Pharmacy{} = pharmacy, new_budget, reason) do

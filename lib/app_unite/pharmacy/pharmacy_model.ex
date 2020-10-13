@@ -73,7 +73,7 @@ defmodule AppUnite.Pharmacy.PharmacyModel do
   @doc """
   Returns a Pharmacy from an ID.
   """
-  @spec get(binary()) :: {:ok, t()} | {:error, atom(), String.t()}
+  @spec get(binary()) :: t() | {:error, atom(), String.t()}
   def get(nil), do: {:error, :get_nil, "Pharmacy"}
 
   def get(id) do

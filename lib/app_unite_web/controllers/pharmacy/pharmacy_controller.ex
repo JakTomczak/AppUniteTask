@@ -27,7 +27,7 @@ defmodule AppUniteWeb.Pharmacy.PharmacyController do
     end
   end
 
-  def update(conn, %{"id" => _pharmacy_id}) do
+  def update(conn, %{"id" => pharmacy_id}) do
     conn
     |> send_resp(:bad_request, "Field 'data' of type JSON is required.")
   end

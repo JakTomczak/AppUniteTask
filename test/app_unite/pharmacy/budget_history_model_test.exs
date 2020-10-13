@@ -5,6 +5,7 @@ defmodule AppUnite.Pharmacy.BudgetHistoryModelTest do
   alias AppUnite.Pharmacy.BudgetHistory
 
   @reason "purchase"
+  @budget 20_000
 
   describe "Budget History Model create/1" do
     setup do
