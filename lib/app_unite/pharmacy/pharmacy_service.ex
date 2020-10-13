@@ -1,6 +1,6 @@
 defmodule AppUnite.Pharmacy.PharmacyService do
   @moduledoc """
-  Module for functions oparating on many related-to-pharmacy schemas.
+  Modlue for functions oparating on many related-to-pharmacy schemas.
   """
 
   alias AppUnite.Repo
